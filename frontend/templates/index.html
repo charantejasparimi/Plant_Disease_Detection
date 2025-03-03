@@ -1,0 +1,58 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Image Prediction with Gemini</title>
+</head>
+<body>
+  <h1>Image Prediction</h1>
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Predict">
+  </form>
+  <br>
+  <div id="result">
+    {% if prediction %}
+      <h2>Prediction Result:</h2>
+      {{ prediction | safe }}
+    {% endif %}
+  </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Prediction with Gemini</title>
+</head>
+<body>
+  <h1>Image Prediction</h1>
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description">
+    <br>
+    <input type="file" name="file">
+    <br>
+    <input type="submit" value="Predict">
+  </form>
+  <br>
+  <br>
+  <form id="prediction-form" action="/pre" method="post" enctype="multipart/form-data">
+    <input type="text" name="description" placeholder="Enter description">
+    <input type="submit" value="Pre">
+  </form>
+  <br>
+  <div id="result">
+    {% if prediction %}
+      <h2>Prediction Result:</h2>
+      {{ prediction | safe }}
+    {% endif %}
+  </div>
+
+  <div id="result">
+    {% if pre %}
+      <h2>Prediction Result:</h2>
+      {{ pre | safe }}
+    {% endif %}
+  </div>
+</body>
+</html>
+

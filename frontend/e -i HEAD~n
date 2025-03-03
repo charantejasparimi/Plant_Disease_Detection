@@ -1,0 +1,24 @@
+[33mcommit 097b11a99b6f1eb26051e0d55b5865371d811a60[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Charan Tejas Parimi <parimicharantejas@gmail.com>
+Date:   Sat Aug 17 13:41:16 2024 +0530
+
+    Your new commit message
+
+[33mcommit e8fb5aeafc9594c95339b22bacfe7c34e06f4c2b[m
+Merge: da59a2a 0f66730
+Author: Charan Tejas Parimi <parimicharantejas@gmail.com>
+Date:   Sat Aug 17 13:33:12 2024 +0530
+
+    Merge branch 'main' of https://github.com/charantejasparimi/Plant_Disease
+
+[33mcommit da59a2ac75c78ffd14f9e16d3083977a61cc5d23[m
+Author: Charan Tejas Parimi <parimicharantejas@gmail.com>
+Date:   Sat Aug 17 13:27:16 2024 +0530
+
+    first_commit
+
+[33mcommit 0f66730db49ffd139562679815d444543d3ff27a[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Charan Tejas Parimi <120124124+charantejasparimi@users.noreply.github.com>
+Date:   Sat Aug 17 13:24:14 2024 +0530
+
+    Initial commit

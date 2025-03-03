@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Prediction with Gemini</title>
+</head>
+<body>
+  <h1>Image Prediction</h1>
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Predict">
+  </form>
+  <br>
+  <div id="result">
+    {% if prediction %}
+      <h2>Prediction Result:</h2>
+      {{ prediction | safe }}
+    {% endif %}
+  </div>
+</body>
+</html>

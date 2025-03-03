@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Prediction</title>
+    <style>
+       body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/026/705/264/non_2x/decoration-of-english-ivy-indoor-hanging-plant-with-aesthetic-white-wall-background-photo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+.result-container,
+.p {
+    max-width: 800px;
+    margin: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.result-container {
+    text-align: center;
+}
+
+h3 {
+    color: #333;
+}
+
+.Disease {
+    color: #007bff;
+    margin-top: 20px;
+}
+
+.predicted-class {
+    font-size: 32px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.p {
+    border: 1px solid #ddd;
+    /* background-color: #FFFDD0; */
+}
+
+.info,
+.precautions,
+.fertilizers,
+.Root_cause {
+    font-size: 18px;
+    color: #333;
+    margin-top: 15px;
+}
+
+.Root_cause {
+    color: #000080;
+}
+
+span{
+    color: green;
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.like-dislike-container button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.like-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.dislike-button {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+/* Hover effect */
+.like-button:hover,
+.dislike-button:hover {
+    opacity: 0.8;
+}
+
+    </style>
+
+</head>
+<body>
+    <br><br>
+    <div style="display: flex;">
+    <div class="result-container">
+        <h3>Image Prediction Result</h3>
+        <p class="Disease" style="font-size: larger;"><strong style="color: aqua;">Disease : <span style="color: rgb(20, 12, 247);">{{ class_label }}</span></strong> </p>
+        <img src="{{ url_for('static', path='uploads/uploaded_image.png') }}" alt="Image">
+    </div>
+    <div class="p">
+        <p class="info"><span>Identification :</span>{{ dis }}</p>
+        <!-- <p class="Root_cause">Root Cause:  {{rc}}       </p> -->
+        <p class="Root_cause"><span>Root Cause :</span>  {{rc}}       </p> 
+        <p class="precautions"><span>Precautions :</span> {{precautions}}     </p>
+        <p class="fertilizers"><span>Fertilizers/Actions to manage :</span> {{fert}}      </p>        
+    </div>
+</div>
+    
+
+    <div class="like-dislike-container" style="text-align: center;">
+        <button id="likeButton" class="like-button" onclick="showThankYou()">Like</button>
+        <button id="dislikeButton" class="dislike-button" onclick="showForm()">Report</button>
+    </div>
+    
+    <div id="thankYouMessage" style="display: none;">
+        <h3 style="color: rgb(11, 96, 4); font-size: larger; text-align: center;">Thanks for using the website!</h3>
+    </div>
+    <div id="hideform" style="display: none; text-align: center;">
+        <h3>Upload Image which is predicted wrong </h3>
+        <form action="/submit" method="post" enctype="multipart/form-data">
+            <input type="text" id="inputText" name="class_label" value="{{class_label}}" style="display: none;">
+            <!-- <input type="hidden" id="imagePathInput" name="imagePathInput" value="{{ url_for('static', path='uploads/uploaded_image.png') }}"> -->
+            <input type="file" name="uploaded_image" id="imagePathInput" value="{{ url_for('static', path='uploads/uploaded_image.png') }}">
+            <input type="submit" value="Submit">
+        </form>
+        </div>
+    <script>
+        function showThankYou() {
+            // Hide the form container
+            document.getElementById('hideform').style.display = 'none';
+            // Show the thank-you message
+            document.getElementById('thankYouMessage').style.display = 'block';
+        }
+
+        function showForm() {
+            // Hide the thank-you message
+            document.getElementById('thankYouMessage').style.display = 'none';
+            // Show the form container
+            document.getElementById('hideform').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

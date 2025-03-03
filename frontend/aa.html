@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload for Prediction</title>
+  </head>
+  <body>
+    <h1>Upload an Image for Prediction</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" id="image" name="file" accept="image/*" required />
+      <button type="submit">Upload</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const formData = new FormData();
+          const imageFile = document.getElementById("image").files[0];
+
+          if (!imageFile) {
+            document.getElementById("result").textContent =
+              "Please select an image file.";
+            return;
+          }
+
+          formData.append("file", imageFile);
+
+          try {
+            const response = await fetch("http://35.172.185.213:8000/predict", {
+              method: "POST",
+              body: formData,
+            });
+
+            if (!response.ok) {
+              throw new Error(`Server error: ${response.status}`);
+            }
+
+            const result = await response.json();
+            document.getElementById("result").textContent =
+              "Prediction: " + result.class_label;
+          } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("result").textContent =
+              "An error occurred while uploading the image. " + error.message;
+          }
+        });
+    </script>
+  </body>
+</html>

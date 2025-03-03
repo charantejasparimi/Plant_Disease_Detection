@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudLabs Text-to-Speech</title>
+  </head>
+  <body>
+    <h1>CloudLabs Text-to-Speech</h1>
+
+    <label for="textInput">Enter text to convert to speech:</label>
+    <textarea id="textInput" rows="5" cols="40"></textarea>
+    <br />
+    <button id="convertText">Convert to Speech</button>
+
+    <div id="audioResult"></div>
+
+    <script>
+      document
+        .getElementById("convertText")
+        .addEventListener("click", function () {
+          const text = document.getElementById("textInput").value;
+
+          if (!text) {
+            alert("Please enter some text.");
+            return;
+          }
+
+          fetch("https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "x-rapidapi-host": "cloudlabs-text-to-speech.p.rapidapi.com",
+              "x-rapidapi-key":
+                "55f2fc48ccmsh86764c46066122cp10190djsnce17183a6838",
+            },
+            body: JSON.stringify({
+              voice_code: "en-US-1", // Example voice code, replace as needed
+              text: text,
+              speed: 1.0, // Speed of the speech (1.0 is normal)
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data && data.audio_url) {
+                const audioResult = document.getElementById("audioResult");
+                audioResult.innerHTML = `
+                        <p>Conversion successful! Click below to download the voice file:</p>
+                        <audio controls>
+                            <source src="${data.audio_url}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <br>
+                        <a href="${data.audio_url}" download="speech.mp3">Download Audio</a>
+                    `;
+              } else {
+                console.error("Error in conversion:", data);
+                alert("Failed to convert text to speech.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching speech:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
